@@ -1,0 +1,187 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+            <img src="../images/sum-app-logo.png" width="300px">
+            <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Logout</a></li>
+              <li><a ui-sref="items({ user_id: $ctrl.user_id })">Items</a></li>
+              <li><a ui-sref="mentors({ user_id: $ctrl.user_id })">Mentors</a></li>
+              <li><a ui-sref="companies({ user_id: $ctrl.user_id })">Groups</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+    <div class="panel-body-companies">
+        <h2>Mentors</h2>
+        <span class="glyphicon glyphicon-plus bottom-right-companies" aria-hidden="true" ng-if="!$ctrl.mentorEditDropdown && !$ctrl.mentorEditing" ng-click="$ctrl.editMentor()"></span>
+    </div>
+    <!-- <div class="mentor-dropdown" ng-show="$ctrl.mentorEdit[mentor.id]"> -->
+    <div class="company-dropdown" ng-show="$ctrl.mentorEditDropdown">
+        <form id="addMentorForm" name="addMentorForm" ng-submit="$ctrl.addMentor()">
+            <!-- <div class="form-company">
+        <input
+          type="text"
+          class="form-control"
+          id="inputName"
+          aria-describedby="emailHelp"
+          placeholder="Name"
+          ng-model="$ctrl.data.name"
+          required>
+
+        <small id="emailHelp" class="form-text text-muted"></small>
+    </div> -->
+
+            <!-- NAME -->
+            <div class="form-company" ng-class="{ 'has-error' : addMentorForm.name.$invalid && !addMentorForm.name.$pristine }">
+                <!-- <label>Name*</label> -->
+                <input type="text" name="name" placeholder="Name" class="form-control" ng-model="$ctrl.data.name" required>
+                <p ng-show="addMentorForm.name.$invalid && !addMentorForm.name.$pristine" class="help-block">Name required</p>
+            </div>
+            <!-- <div class="form-company">
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          aria-describedby="emailHelp"
+          placeholder="Email"
+          ng-model="$ctrl.data.email"
+          required>
+
+        <small id="emailHelp" class="form-text text-muted"></small>
+    </div> -->
+
+            <!-- EMAIL -->
+            <div class="form-company" ng-class="{ 'has-error' : addMentorForm.email.$invalid && !addMentorForm.email.$pristine }">
+                <!-- <label>Email*</label> -->
+                <input type="email" name="email" placeholder="Email" class="form-control" ng-model="$ctrl.data.email" required>
+                <p ng-show="addMentorForm.email.$invalid && !addMentorForm.email.$pristine" class="help-block" required>Enter a valid email</p>
+            </div>
+
+            <div class="">
+                <a href="#" class="btn btn-danger bottom-right" role="button" ng-click="$ctrl.editMentor()">Cancel</a>
+                <button type="submit" class="btn btn-success bottom-right" data-toggle="modal" data-target="#pleaseWaitDialog" ng-disabled="addMentorForm.$invalid">Submit</button>
+
+
+                <!-- <button type="submit" class="btn btn-success bottom-right">Submit</button> -->
+                <!-- <a href="/profile/mentors" class="btn btn-success bottom-right" role="button">Submit</a> -->
+                <!-- <a href="#" class="btn btn-success bottom-right" role="button">Save</a> -->
+                <!-- <a href="#" class="btn btn-primary bottom-right" role="button" ng-if="!$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.editMentorInfo(mentor.id)">Edit</a> -->
+            </div>
+        </form>
+    </div>
+    <div ng-repeat="mentor in $ctrl.mentors">
+        <!-- <div class="panel panel-default">
+        <div class="panel-body">
+            <div>{{ mentor.name }}</div>
+            <div><a href="#" class="btn btn-primary right" role="button">edit</a></div>
+            <div class="panel panel-default right">
+              <div>{{ mentor.email }}</div>
+          </div>
+        </div>
+    </div>
+    <div class="well well-lg">{{ mentor.name }}
+      <div class="">{{ mentor.email }}
+    <a href="#" class="btn btn-primary bottom-right" role="button">edit</a>
+</div> -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+            <!-- <div class="panel-body"> -->
+                <div class="mentor-padding">
+
+                    {{ mentor.name }} - {{ mentor.id }}
+                    <!-- <span class="glyphicon glyphicon-plus bottom-right" aria-hidden="true" ng-if="!$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.editMentorInfo(mentor.id)"></span> -->
+                    <span class="glyphicon glyphicon-plus bottom-right" aria-hidden="true" ng-if="!$ctrl.mentorEditDropdown && !$ctrl.mentorEditing" ng-click="$ctrl.editMentorInfo(mentor.id)"></span>
+
+                    <br> Email: <span class="bootstrap-color-primary">{{ mentor.email }}</span>
+                </div>
+
+                <!-- <div class="panel-body"> -->
+                <div class="mentor-dropdown" ng-show="$ctrl.mentorEdit[mentor.id]">
+                  <form name="updateMentorForm" ng-submit="$ctrl.updateMentor(mentor.id)">
+                      <div class="form-company" ng-class="{ 'has-error' : updateMentorForm.name.$invalid && !updateMentorForm.name.$pristine }">
+                          <!-- <label for="inputName">Name</label> -->
+                          <input type="text" name="name" placeholder="Name" class="form-control" ng-value="mentor.name" ng-model="mentor.name" required>
+                          <!-- <input type="text" name="name" placeholder="Name" class="form-control" id="inputName" aria-describedby="nameHelp"  required> -->
+                          <p ng-show="updateMentorForm.name.$invalid && !updateMentorForm.name.$pristine" class="help-block">Name required</p>
+                          <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                      </div>
+                      <div class="form-company" ng-class="{ 'has-error' : updateMentorForm.email.$invalid && !updateMentorForm.email.$pristine }">
+                          <!-- <label for="inputEmail">Email address</label> -->
+                          <input type="email" name="email" placeholder="Email" class="form-control" ng-value="mentor.email" ng-model="mentor.email" required>
+                          <!-- <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email" required> -->
+                          <p ng-show="updateMentorForm.email.$invalid && !updateMentorForm.email.$pristine" class="help-block">Enter a valid email</p>
+                          <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                      </div>
+                      <!-- Dropdown checkboxes -->
+                      <div class="row padding" ng-show="$ctrl.mentorEdit[mentor.id]">
+                          <!-- <div ng-repeat="mentor in company.mentor"> -->
+                          <div ng-repeat="company in mentor.companies">
+                              <div class="col-xs-12 col-sm-4">
+                                  <div class="checkbox">
+                                    <label ng-if="company.checked==true"><input type="checkbox" name="company" value="{{ company.id }}" ng-click="$ctrl.companyChecked(mentor.id, company.id)" checked>{{ company.name }}</label>
+                                    <label ng-if="!company.checked==true"><input type="checkbox" name="company" value="{{ company.id }}" ng-click="$ctrl.companyChecked(mentor.id, company.id)">{{ company.name }}</label>
+
+                                    <!-- <label ng-if="!$ctrl.mentorChecked(mentor.id, company.id)" ng-change="$ctrl.check(mentor.id)"><input type="checkbox" name="mentor" value="{{ mentor.id }}">{{ mentor.name }}</label> -->
+
+                                      <!-- <label ng-if="$ctrl.companyEdit[company.id]"><input type="checkbox" name="mentor" value="{{ mentor.id }}" ng-model="mentor.checked" ng-change="$ctrl.unCheck(mentor.id)" checked>{{ mentor.name }}</label> -->
+                                      <!-- <label ng-if="!$ctrl.companyEdit[company.id]"><input type="checkbox" value="{{ mentor.id }}" ng-model="mentor.checked" ng-change="$ctrl.check(mentor.id)">{{ mentor.name }}</label> -->
+                                  </div>
+                                  <!-- <div class="input-company">
+                                  <span class="input-company-addon"><input type="checkbox" aria-label="...">Test</span>
+                                  <input type="text" class="form-control" aria-label="...">
+                              </div> -->
+                                  <!-- /input-company -->
+                              </div>
+                          </div>
+                          <!-- <label ng-repeat="(key, value) in $ctrl.names" for="{{key}}">
+                                 {{value}}
+                                 <input type="checkbox"
+                                        ng-model="names[key]"
+                                        ng-value="{{ value }}"
+                                        id="{{ key }}"
+                                        name="{{ key }}">
+                          </label> -->
+                          <div ng-repeat="name in $ctrl.names">
+                            <div ng-repeat="(key, val) in name">
+                              <label for="{{key}}">
+                                {{key}}
+                              <input
+                                type="checkbox"
+                                ng-model="$ctrl.names[key]"
+                                value="{{val}}">
+                               </label>
+                            </div>
+                          </div>
+
+                          <!-- <label ng-repeat="(key,val) in $ctrl.names">
+                            <input type="checkbox" ng-model="$ctrl.names[key]" /> {{key}}
+                          </label> -->
+
+
+                      </div>
+                      <div class="">
+                          <!-- <a href="#" class="btn btn-danger bottom-right" role="button" ng-click="$ctrl.editMentor()">Cancel</a> -->
+
+                          <a href="#" class="btn btn-danger bottom-left" role="button" ng-if="$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.deleteMentor(mentor.id)">Delete</a>
+                          <a href="#" class="btn btn-warning bottom-right" role="button" ng-if="$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.editMentorInfo(mentor.id)">Cancel</a>
+                          <button type="submit" class="btn btn-success bottom-right" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="$ctrl.mentorEdit[mentor.id]" ng-disabled="updateMentorForm.$invalid">Submit</button>
+                          <!-- <a href="#" class="btn btn-success bottom-right" role="button" ng-if="$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.editMentorInfo(mentor.id)">Save</a> -->
+                          <!-- <a href="#" class="btn btn-primary bottom-right" role="button" ng-if="!$ctrl.mentorEdit[mentor.id]" ng-click="$ctrl.editMentorInfo(mentor.id)">Edit</a> -->
+                      </div>
+                  </form>
+              </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+    </div>
+</main>

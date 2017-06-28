@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="row center">
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+                  <span class="sr-only">Toggle Navigation</span>
+                  <span class="fa fa-chevron-down"></span> <b>Menu</b>
+                </button> -->
+                <img src="../images/sum-app-logo.png" width="300px">
+                <!-- <a class="tagline">Share ( U+Me )</a> -->
+            </div>
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<main class="container">
+    <div class="row center">
+      <div class="row vert-center">
+        <div class="col col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Login</h3>
+                </div>
+                <form name="loginForm" ng-submit="$ctrl.login()">
+                    <div class="panel-body">
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" ng-model="$ctrl.loginForm.email">
+                            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block" required>Enter a valid email.</p>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" class="form-control" id="inputPassword" minlength="5" maxlength="20" ng-model="$ctrl.loginForm.password" required>
+                            <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block" required>Enter a password between 5-20 characters.</p>
+                        </div>
+                        <div class="alert alert-danger" role="alert" ng-if="$ctrl.loginFailed">{{ $ctrl.message }}</div>
+                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#pleaseWaitDialog" ng-disabled="loginForm.$invalid">Login</button>
+                        <button type="submit" class="btn btn-primary" onclick="window.location='/signup';">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+    <div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+        <div id="ajax_loader">
+            <img src="images/ajax-loader.gif" width="100px" style="display: block; margin-left: auto; margin-right: auto; padding-top: 250px">
+        </div>
+    </div>
+</main>

@@ -1,0 +1,21 @@
+{
+  "name": "bower.json",
+  "homepage": "https://github.com/darrenhankins/sum-client",
+  "authors": [
+    "Darren Hankins <hankins.darren@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngUpload": "^0.5.19",
+    "angular-messages": "^1.6.3"
+  }
+}

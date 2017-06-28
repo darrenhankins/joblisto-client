@@ -1,0 +1,133 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+          <img src="../images/sum-app-logo.png" width="300px">
+          <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Logout</a></li>
+              <li><a ui-sref="items({ user_id: $ctrl.user_id })">Items</a></li>
+              <li><a ui-sref="friends({ user_id: $ctrl.user_id })">Friends</a></li>
+              <li><a ui-sref="groups({ user_id: $ctrl.user_id })">Groups</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+<div class="panel-body-groups">
+    <h2>Groups</h2>
+    <span class="glyphicon glyphicon-plus bottom-right-groups" aria-hidden="true" ng-if="!$ctrl.groupEditDropdown && !$ctrl.groupEditing" ng-click="$ctrl.editGroup()"></span>
+</div>
+<!-- <div class="friend-dropdown" ng-show="$ctrl.friendEdit[friend.id]"> -->
+<div class="group-dropdown" ng-show="$ctrl.groupEditDropdown">
+
+<form id="addGroupForm" name="addGroupForm" ng-submit="$ctrl.newGroup()">
+    <div class="form-group" ng-class="{ 'has-error' : addGroupForm.inputName.$invalid && !addGroupForm.inputName.$pristine }">
+        <!-- <label for="inputName">Name</label> -->
+        <input
+          type="text"
+          name="inputName"
+          class="form-control"
+          placeholder="Name"
+          ng-model="$ctrl.data.name" required>
+          <p ng-show="addGroupForm.inputName.$invalid && !addGroupForm.inputName.$pristine" class="help-block">Name required</p>
+    </div>
+
+    <div class="">
+        <a href="#" class="btn btn-danger bottom-right" role="button" ng-click="$ctrl.editGroup()">Cancel</a>
+        <button type="submit" class="btn btn-success bottom-right" ng-disabled="addGroupForm.$invalid">Submit</button>
+        <!-- <a href="#" class="btn btn-success bottom-right" role="button" ng-click="$ctrl.newGroup()">Save</a> -->
+        <!-- <a href="#" class="btn btn-primary bottom-right" role="button" ng-if="!$ctrl.friendEdit[friend.id]" ng-click="$ctrl.editFriendInfo(friend.id)">Edit</a> -->
+    </div>
+</form>
+
+</div>
+
+
+
+<div ng-repeat="group in $ctrl.groups">
+  <form id="updateGroupForm" name="updateGroupForm" ng-submit="$ctrl.updateGroup(group.id)">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div>
+              <!-- group name -->
+                <span ng-if="!$ctrl.groupEdit[group.id]">{{ group.name }}</span>
+                <div class="form-group" ng-if="$ctrl.groupEdit[group.id]" ng-class="{ 'has-error' : updateGroupForm.name.$invalid && !updateGroupForm.name.$pristine }">
+                    <input type="text" name="name" class="form-control" ng-value="group.name" ng-model="group.name" required>
+                    <p ng-show="updateGroupForm.name.$invalid && !updateGroupForm.name.$pristine" class="help-block">Name required</p>
+                </div>
+
+                <!-- <span class="glyphicon glyphicon-plus bottom-right" aria-hidden="true" ng-if="!$ctrl.groupEditDropdown && !$ctrl.groupEditing" ng-click="$ctrl.editGroupInfo(group.id)"></span> -->
+                <span class="glyphicon glyphicon-plus bottom-right" aria-hidden="true" ng-if="!$ctrl.groupEditDropdown && !$ctrl.groupEditing" ng-click="$ctrl.editGroupInfo(group.id)"></span>
+            </div>
+            <!-- Dropdown checkboxes -->
+            <div class="row padding" ng-show="$ctrl.groupEdit[group.id]">
+                <!-- <div ng-repeat="friend in group.friend"> -->
+                <div ng-repeat="friend in group.friends">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="checkbox">
+                          <label ng-if="friend.checked==true"><input type="checkbox" name="friend" value="{{ friend.id }}" ng-click="$ctrl.friendChecked(group.id, friend.id)" checked>{{ friend.name }}</label>
+                          <label ng-if="!friend.checked==true"><input type="checkbox" name="friend" value="{{ friend.id }}" ng-click="$ctrl.friendChecked(group.id, friend.id)">{{ friend.name }}</label>
+
+                          <!-- <label ng-if="!$ctrl.friendChecked(friend.id, group.id)" ng-change="$ctrl.check(friend.id)"><input type="checkbox" name="friend" value="{{ friend.id }}">{{ friend.name }}</label> -->
+
+                            <!-- <label ng-if="$ctrl.groupEdit[group.id]"><input type="checkbox" name="friend" value="{{ friend.id }}" ng-model="friend.checked" ng-change="$ctrl.unCheck(friend.id)" checked>{{ friend.name }}</label> -->
+                            <!-- <label ng-if="!$ctrl.groupEdit[group.id]"><input type="checkbox" value="{{ friend.id }}" ng-model="friend.checked" ng-change="$ctrl.check(friend.id)">{{ friend.name }}</label> -->
+                        </div>
+                        <!-- <div class="input-group">
+                        <span class="input-group-addon"><input type="checkbox" aria-label="...">Test</span>
+                        <input type="text" class="form-control" aria-label="...">
+                    </div> -->
+                        <!-- /input-group -->
+                    </div>
+                </div>
+                <!-- <label ng-repeat="(key, value) in $ctrl.names" for="{{key}}">
+                       {{value}}
+                       <input type="checkbox"
+                              ng-model="names[key]"
+                              ng-value="{{ value }}"
+                              id="{{ key }}"
+                              name="{{ key }}">
+                </label> -->
+                <div ng-repeat="name in $ctrl.names">
+                  <div ng-repeat="(key, val) in name">
+                    <label for="{{key}}">
+                      {{key}}
+                    <input
+                      type="checkbox"
+                      ng-model="$ctrl.names[key]"
+                      value="{{val}}">
+                     </label>
+                  </div>
+                </div>
+
+                <!-- <label ng-repeat="(key,val) in $ctrl.names">
+                  <input type="checkbox" ng-model="$ctrl.names[key]" /> {{key}}
+                </label> -->
+
+
+            </div>
+            <!-- <a href="#" ng-if="!$ctrl.groupEdit[group.id]" ng-click="$ctrl.editGroupInfo(group.id)" class="btn btn-primary right" role="button">Edit</a> -->
+            <a href="#" ng-if="$ctrl.groupEdit[group.id]" ng-click="$ctrl.deleteGroup(group.id); " class="btn btn-danger left" role="button">Delete</a>
+            <a href="#" ng-if="$ctrl.groupEdit[group.id]" ng-click="$ctrl.editGroupInfo(group.id); " class="btn btn-warning right" role="button">Cancel</a>
+            <!-- <a href="#" ng-if="$ctrl.groupEdit[group.id]" ng-click="$ctrl.editGroupInfo(group.id)" class="btn btn-success right" role="button">Save</a> -->
+            <!-- <button type="submit" class="btn btn-success bottom-right" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="$ctrl.groupEdit[group.id]" ng-disabled="updateGroupForm.$invalid">Submit</button> -->
+            <button type="submit" class="btn btn-success bottom-right" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="$ctrl.groupEdit[group.id]">Submit</button>
+
+
+            <!-- /.row -->
+            <!-- Dropdown checkboxes -->
+
+        </div>
+
+    </div>
+</form>
+</div>
+
+</main>

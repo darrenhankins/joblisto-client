@@ -1,0 +1,114 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+          <img src="../images/sum-app-logo.png" width="300px">
+          <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a ui-sref="items({ user_id: $ctrl.user_id })">Items</a></li>
+                <li><a ui-sref="friends({ user_id: $ctrl.user_id })">Friends</a></li>
+                <li><a ui-sref="groups({ user_id: $ctrl.user_id })">Groups</a></li>
+
+                <!-- <li><a href="/profile/{{ $ctrl.user_id }}/items">Items</a></li>
+                <li><a href="/profile/{{ $ctrl.user_id }}/friends">Friends</a></li>
+                <li><a href="/profile/{{ $ctrl.user_id }}/groups">Groups</a></li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+  <div class="col-sm-12 panel-body-groups">
+      <h2>Edit Item</h2>
+      <!-- <div class="add-item-button"> -->
+      <!-- <a ui-sref="add({ user_id: $ctrl.user_id })" class="btn btn-primary-unemailed" role="button" ng-click="$ctrl.setItemId(item.id)">Add Item</a> -->
+      <!-- <a href="/profile/{{ $ctrl.user_id }}/add" class="btn btn-primary-unemailed" role="button" ng-click="$ctrl.setItemId(item.id)">Add Item</a> -->
+    </div>
+
+  </div>
+    <!-- <div class="row">
+        <div class="col-sm-3 box">
+            <img src="{{ item.image_url }}" width="150px" height="150px">
+        </div>
+        <div class="col-sm-9 box">
+            <div class="row">
+                <div class="col-sm-12 box">
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <div class="col-sm-12 box description">
+                    {{ item.description }}
+                    <div class="bottom-right">
+                        {{ item.free }}
+                    </div>
+                    <div class="bottom-right">
+                        {{ item.available }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="row"> -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+    <!-- </div> -->
+
+
+
+
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                        <img src="{{ $ctrl.item.image_url }}" alt="..." height="150px">
+                        <div class="caption">
+                          <form name="updateItemForm" id="updateItemForm" ng-submit="$ctrl.updateItem($ctrl.item.id)">
+                            <div class="form-group">
+                              <label for="InputName">Name</label>
+                              <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp" ng-value="$ctrl.item.name" ng-model="$ctrl.item.name" required>
+                              <small id="nameHelp" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                              <label for="InputDescription">Description</label>
+                              <textarea class="form-control" id="InputDescription" rows="3" ng-value="$ctrl.item.description" ng-model="$ctrl.item.description"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="InputImageUrl">Image Url</label>
+                              <input type="text" class="form-control" id="InputImageUrl" aria-describedby="imageUrlHelp" ng-value="$ctrl.item.image_url" ng-model="$ctrl.item.image_url">
+                              <small id="imageUrlHelp" class="form-text text-muted"></small>
+                            </div>
+                            <!-- <div class="form-check">
+                              <label class="form-check-label">
+                                Is this item for sale?
+                                <input type="checkbox" class="form-check-input" ng-model="sale">
+                              </label>
+                            </div>
+                            <div class="form-group" ng-show="sale">
+                              <label for="InputPrice">Price</label>
+                              <input type="number" class="form-control" id="InputPrice" aria-describedby="pricelHelp" placeholder="$" ng-model="$ctrl.data.price">
+                              <small id="pricelHelp" class="form-text text-muted"></small>
+                            </div>
+                            <hr> -->
+                            <label for="InputImageUrl">Groups assigned to this Item</label>
+                            <div class="row padding">
+                                <div ng-repeat="group in $ctrl.checkedGroups">
+                                  <div class="col-xs-12 col-sm-6 col-md-4">
+                                      <div class="checkbox">
+                                        <label ng-if="group.checked==true"><input type="checkbox" name="group" value="{{ group.id }}" ng-click="$ctrl.groupChecked(group.id)" checked>{{ group.name }}</label>
+                                        <label ng-if="!group.checked==true"><input type="checkbox" name="group" value="{{ group.id }}" ng-click="$ctrl.groupChecked(group.id)">{{ group.name }}</label>
+                                        </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-danger bottom-left" role="button" ng-click="$ctrl.deleteItem($ctrl.item.id)">Delete</a>
+                            <a href="#" class="btn btn-warning bottom-right" role="button" ng-click="$ctrl.cancelEdit()">Cancel</a>
+                            <!-- <button type="submit" class="btn btn-success bottom-right" data-dismiss="modal">Submit</button> -->
+                            <button type="submit" class="btn btn-success bottom-right">Submit</button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+
+</main>

@@ -1,0 +1,125 @@
+<div class="col-sm-12">
+    <h2>Your Items:</h2>
+    <div class="add-item-button">
+    <a href="/profile/add" class="btn btn-primary-unemailed" role="button" ng-click="$ctrl.setItemId(item.id)">Add Item</a>
+  </div>
+
+</div>
+<div ng-repeat="item in $ctrl.items">
+    <!-- <div class="row">
+        <div class="col-sm-3 box">
+            <img src="{{ item.image_url }}" width="150px" height="150px">
+        </div>
+        <div class="col-sm-9 box">
+            <div class="row">
+                <div class="col-sm-12 box">
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <div class="col-sm-12 box description">
+                    {{ item.description }}
+                    <div class="bottom-right">
+                        {{ item.free }}
+                    </div>
+                    <div class="bottom-right">
+                        {{ item.available }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="row"> -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+    <div class="col-sm-6 col-md-4" ng-if="!$ctrl.itemEdit[item.id]">
+        <div class="thumbnail">
+          <!-- <div ng-repeat="group in item.group">
+            <div class="label label-success">{{ group.name }}</div>
+          </div> -->
+            <img src="{{ item.image_url }}" alt="..." height="150px">
+            <div class="caption">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+                <div class="bottom-right box">
+                    <div class="label label-success" ng-if="item.free">Free</div>
+                    <div class="label label-success" ng-if="!item.free">$$$</div>
+                    <br>
+                    <div class="label label-success" ng-if="item.available">Available</div>
+                    <div class="label label-danger" ng-if="!item.available">Claimed</div>
+                </div>
+                <div ng-repeat="group in item.group">
+                  <!-- <p>{{ group.name }}</p> -->
+                </div>
+
+                <p><a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.setItemId(item.id)">Edit</a>
+                    <a href="#" class="btn btn-primary-emailed" role="button" ng-if="item.group.length == 0" disabled>No Groups</a>
+                    <a href="#" class="btn btn-primary-unemailed" role="button" ng-show="item.group.length > 0" ng-if="!item.emailed" ng-click="$ctrl.sendEmail(item.id)">Send Email</a>
+                    <a href="#" class="btn btn-primary-emailed" role="button" ng-if="item.emailed" ng-click="$ctrl.sendEmail(item.id)">Resend Email</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" ng-if="$ctrl.itemEdit[item.id]">
+        <div class="thumbnail">
+            <img src="{{ item.image_url }}" alt="..." height="150px">
+            <div class="caption">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+                <div class="bottom-right box">
+                    <div class="label label-success" ng-if="item.free">Free</div>
+                    <div class="label label-success" ng-if="!item.free">$$$</div>
+                    <br>
+                    <div class="label label-success" ng-if="item.available">Available</div>
+                    <div class="label label-danger" ng-if="!item.available">Claimed</div>
+                </div>
+                <p><a href="#" class="btn btn-primary" role="button" ng-click="$ctrl.editItemInfo(item.id)">save</a>
+                    <a href="#" class="btn btn-primary-unemailed" role="button" ng-if="!item.emailed" ng-click="$ctrl.sendEmail(item.id)">Send Email</a>
+                    <a href="#" class="btn btn-primary-emailed" role="button" ng-if="item.emailed">Resend Email</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ $ctrl.items[$ctrl.itemId-1].name }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <div class="thumbnail">
+                            <img src="{{ $ctrl.items[$ctrl.itemId-1].image_url }}" alt="..." height="150px">
+                            <div class="caption">
+                                <p>{{ $ctrl.items[$ctrl.itemId-1].description }}</p>
+                                <!-- file uploader start -->
+                                <!-- <div ng-app="app">
+                                    <div ng-controller="mainCtrl"> -->
+                                        <form action="/uploads" ng-upload="complete(content)">
+                                            <input type="file" name="avatar"></input>
+                                            <input type="submit" value="Upload" ng-disabled="$isUploading"></input>
+                                        </form>
+                                    <!-- </div>
+                                </div> -->
+                                <!-- file uploader end -->
+                                <div class="bottom-right box">
+                                    <!-- <div class="label label-success" ng-if="$ctrl.items[$ctrl.itemId-1].free">Free</div> -->
+                                    <!-- <div class="label label-success" ng-if="!$ctrl.items[$ctrl.itemId-1].free">$$$</div> -->
+                                    <br>
+                                    <!-- <div class="label label-success" ng-if="$ctrl.items[$ctrl.itemId-1].available">Available</div> -->
+                                    <!-- <div class="label label-danger" ng-if="!$ctrl.items[$ctrl.itemId-1].available">Claimed</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

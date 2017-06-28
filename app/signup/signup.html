@@ -1,0 +1,94 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+          <img src="../images/sum-app-logo.png" width="300px">
+          <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Signup</h3>
+    </div>
+    <form name="signupForm" ng-submit="$ctrl.signup()">
+    <div class="panel-body">
+
+        <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
+            <label for="inputEmail1">Email address</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="inputEmail"
+              aria-describedby="emailHelp"
+              ng-model="$ctrl.signupForm.email"
+              required>
+            <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+            <p ng-show="signupForm.email.$invalid && !signupForm.email.$pristine" class="help-block" required>Enter a valid email.</p>
+
+        </div>
+
+        <div class="alert alert-danger" role="alert" ng-if="$ctrl.signUpFailed">{{ $ctrl.message }}</div>
+
+        <div class="form-group" ng-class="{ 'has-error' : signupForm.username.$invalid && !signupForm.username.$pristine }">
+            <label for="inputUsername">Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="inputUsername"
+              ng-model="$ctrl.signupForm.username"
+              required>
+            <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+            <p ng-show="signupForm.username.$invalid && !signupForm.username.$pristine" class="help-block" required>Enter a username.</p>
+
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine }">
+            <label for="inputPassword">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="inputPassword"
+              minlength = "5"
+              maxlength = "20"
+              ng-model="$ctrl.signupForm.password"
+              required>
+              <p ng-show="signupForm.password.$invalid && !signupForm.password.$pristine" class="help-block" required>Enter a password between 5-20 characters.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : signupForm.password2.$invalid && !signupForm.password2.$pristine }">
+            <label for="inputPassword2">Re-enter Password</label>
+            <input
+              type="password"
+              name="password2"
+              class="form-control"
+              id="inputPassword2"
+              minlength = "5"
+              maxlength = "20"
+              ng-model="$ctrl.signupForm.password2"
+              required>
+              <p ng-show="signupForm.password2.$invalid && !signupForm.password2.$pristine" class="help-block" required>Enter a password between 5-20 characters.</p>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-if="$ctrl.passwordsFailed">{{ $ctrl.message }}</div>
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#pleaseWaitDialog" ng-disabled="signupForm.$invalid">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="window.location='/login';">Login</button>
+    </div>
+  </form>
+</div>
+<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+        <div id="ajax_loader">
+          <img src="images/ajax-loader.gif" width="100px" style="display: block; margin-left: auto; margin-right: auto; padding-top: 250px">
+        </div>
+</div>
+</main>

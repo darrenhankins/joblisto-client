@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+          <img src="../images/sum-app-logo.png" width="300px">
+          <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/profile/{{ $ctrl.user_id }}/items">Items</a></li>
+                <li><a href="/profile/{{ $ctrl.user_id }}/friends">Friends</a></li>
+                <li><a href="/profile/{{ $ctrl.user_id }}/groups">Groups</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+<div class="col-sm-12 panel-body-groups">
+    <h2>Claim Item</h2>
+</div>
+
+</div>
+<div class="col-sm-12  min-width">
+    <div class="thumbnail max-width" ng-show="!$ctrl.claimedItem && !$ctrl.claimedItemNo">
+        <img src="http://harvardmagazine.com/sites/default/files/inline_images/2016-SeptOct/Football.png" alt="..." height="150px">
+        <div class="caption-center">
+            <h3>Football</h3>
+            <p>New Football</p>
+            <p>Free</p>
+
+            <!-- <div class="bottom-right box">
+                <div class="label label-danger" ng-if="item.free">Free</div>
+                <div class="label label-success" ng-if="!item.free">$$$</div>
+                <br>
+                <div class="label label-success" ng-if="item.available">Available</div>
+                <div class="label label-danger" ng-if="!item.available">Claimed</div>
+            </div> -->
+            <!-- <a href="/profile/items" class="btn btn-success bottom-right" role="button">Claim</a>
+            <a href="/profile/items" class="btn btn-danger bottom-right" role="button">Cancel</a> -->
+
+            <!-- <p> -->
+              <a href="#" class="btn btn-success" role="button" ng-click="$ctrl.claimItem()">Claim</a>
+                <a href="#" class="btn btn-danger" role="button" ng-click="$ctrl.claimItemNo()">Cancel</a>
+              <!-- </p> -->
+        </div>
+    </div>
+    <div class="thumbnail max-width" ng-show="$ctrl.claimedItem">
+        <img src="http://harvardmagazine.com/sites/default/files/inline_images/2016-SeptOct/Football.png" alt="..." height="150px">
+        <div class="caption-center">
+            <h3>Thank you for selecting this item.</h3>
+            <p>We will be in touch with you shortly.</p>
+        </div>
+    </div>
+    <div class="thumbnail max-width" ng-show="$ctrl.claimedItemNo">
+        <img src="http://harvardmagazine.com/sites/default/files/inline_images/2016-SeptOct/Football.png" alt="..." height="150px">
+        <div class="caption-center">
+            <h3>No worries, Thank you!</h3>
+            <p></p>
+        </div>
+    </div>
+</div>
+</main>

@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default transparent navbar-static-top" role="navigation" id="navbar-main">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navCollapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="fa fa-chevron-down"></span> <b>Menu</b>
+          </button>
+          <img src="../images/sum-app-logo.png" width="300px">
+          <a class="tagline">Share ( U+Me )</a>
+            <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Logout</a></li>
+              <li><a ui-sref="items({ user_id: $ctrl.user_id })">Items</a></li>
+              <li><a ui-sref="friends({ user_id: $ctrl.user_id })">Friends</a></li>
+              <li><a ui-sref="groups({ user_id: $ctrl.user_id })">Groups</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container">
+<div class="col-sm-12 panel-body-groups">
+    <h2>Add Item</h2>
+</div>
+
+</div>
+<form ng-submit="$ctrl.newItem()">
+  <div class="form-group">
+    <label for="InputName">Name</label>
+    <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp" placeholder="" ng-model="$ctrl.data.name" required>
+    <small id="nameHelp" class="form-text text-muted"></small>
+  </div>
+  <div class="form-group">
+    <label for="InputDescription">Description</label>
+    <textarea class="form-control" id="InputDescription" rows="3" ng-model="$ctrl.data.description" placeholder="" ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="InputImageUrl">Image Url</label>
+    <input type="text" class="form-control" id="InputImageUrl" aria-describedby="imageUrlHelp" placeholder="" ng-model="$ctrl.data.image_url">
+    <small id="imageUrlHelp" class="form-text text-muted"></small>
+  </div>
+  <!-- <div class="form-check">
+    <label class="form-check-label">
+      Is this item for sale?
+      <input type="checkbox" class="form-check-input" ng-model="sale">
+    </label>
+  </div>
+<div class="form-group" ng-show="sale">
+  <label for="InputPrice">Price</label>
+  <input type="number" class="form-control" id="InputPrice" aria-describedby="pricelHelp" placeholder="$" ng-model="$ctrl.data.price">
+  <small id="pricelHelp" class="form-text text-muted"></small>
+</div> -->
+<!-- <hr> -->
+
+<!-- <label for="InputImageUrl">Groups</label>
+<div class="row padding">
+    <div ng-repeat="group in $ctrl.groups">
+
+    <div class="col-xs-6 col-sm-3">
+        <div class="checkbox">
+            <label ng-if="$ctrl.groupEdit[group.id]" ><input type="checkbox" ng-model="$ctrl.data.group[group.id]"  checked>{{ group.name }}</label>
+            <label ng-if="!$ctrl.groupEdit[group.id]"><input type="checkbox" ng-model="$ctrl.data.group[group.id]" >{{ group.name }}</label>
+        </div>
+    </div>
+    </div>
+</div> -->
+  <a ui-sref="items({ user_id: $ctrl.user_id })" class="btn btn-danger bottom-right" role="button">Cancel</a>
+  <button type="submit" class="btn btn-success bottom-right">Submit</button>
+  <!-- <a href="/profile/{{ $ctrl.user_id }}/items" class="btn btn-danger bottom-right" role="button">Cancel</a> -->
+</form>
+</main>
