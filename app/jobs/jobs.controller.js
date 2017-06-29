@@ -77,7 +77,7 @@
         if (window.location.host.indexOf('localhost') != -1) {
             return 'http://localhost:3000';
         } else {
-            return 'https://job-app.herokuapp.com';
+            return 'https://joblisto.herokuapp.com';
         }
     }
 
