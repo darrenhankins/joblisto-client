@@ -7,7 +7,7 @@
         .module('jobApp')
         .controller('MentorsController', MentorsController);
 
-    function mentorsController($scope, $http, $location, $stateParams, $state) {
+    function MentorsController($scope, $http, $location, $stateParams, $state) {
         console.log('This is the MentorsController...');
         const vm = this;
 

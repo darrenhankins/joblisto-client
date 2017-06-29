@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('sumApp')
+    .module('jobApp')
     .component('claim', {
       controller: 'ClaimController',
       templateUrl: 'app/claim/claim.html'

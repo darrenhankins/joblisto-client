@@ -4,7 +4,7 @@
     const API_URL = getHostUrl();
 
     angular
-        .module('sumApp')
+        .module('jobApp')
         .controller('ClaimController', ClaimController);
 
     function ClaimController($scope, $http, $stateParams) {

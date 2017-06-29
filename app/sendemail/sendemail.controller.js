@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('sumApp')
+        .module('jobApp')
         .controller('SendemailController', SendemailController);
 
     function SendemailController($scope, $http) {

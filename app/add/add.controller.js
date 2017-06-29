@@ -4,7 +4,7 @@
   const API_URL = getHostUrl();
 
   angular
-    .module('sumApp')
+    .module('jobApp')
     .controller('AddController', AddController);
 
     function AddController($scope, $http, $location, $stateParams, $state) {

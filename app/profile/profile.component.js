@@ -3,7 +3,7 @@
 
   angular
     .module('sumApp')
-    .component('profile', {
+    .component('jobApp', {
       controller: 'ProfileController',
       templateUrl: 'app/profile/profile.html'
     });

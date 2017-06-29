@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('sumApp')
+    .module('jobApp')
     .controller('ProfileController', ProfileController);
 
     function ProfileController($scope, $http){

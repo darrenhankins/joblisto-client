@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('sumApp')
+    .module('jobApp')
     .component('sendemail', {
       controller: 'SendemailController',
       templateUrl: 'app/sendemail/sendemail.html'

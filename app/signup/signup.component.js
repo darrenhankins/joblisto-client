@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('sumApp')
+    .module('jobApp')
     .component('signup', {
       controller: 'SignupController',
       templateUrl: 'app/signup/signup.html'

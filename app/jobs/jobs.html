@@ -5,8 +5,8 @@
               <span class="sr-only">Toggle Navigation</span>
               <span class="fa fa-chevron-down"></span> <b>Menu</b>
           </button>
-            <img src="../images/sum-app-logo.png" width="300px">
-            <a class="tagline">Share ( U+Me )</a>
+            <img src="../images/joblisto.png" width="300px">
+            <!-- <a class="tagline">Share ( U+Me )</a> -->
             <!-- <a class="navbar-brand" href="#">Sum (Share U + M)</a> -->
         </div>
         <div class="collapse navbar-collapse" id="navCollapse">
@@ -22,7 +22,7 @@
 <main class="container">
     <div class="row">
         <div class="col-sm-12 title-bar">
-            <h2>Your Jobs</h2>
+            <h3>Your Jobs</h3>
             <div class="add-job-button">
                 <a ui-sref="add({ user_id: $ctrl.user_id })" class="btn btn-primary-unemailed" role="button" ng-click="$ctrl.setJobId(job.id)">Add Job</a>
             </div>
@@ -36,10 +36,15 @@
                     <p class="timestamp"><b>Updated:</b> {{ job.updated_at }}</p>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3 caption-img">
+                    <div class="col-sm-3">
                         <img src="{{ job.image_url }}" alt="...">
                     </div>
                     <div class="col-sm-9 caption">
+                        <a ui-sref="edit({ user_id: $ctrl.user_id, job_id: job.id })" class="btn btn-outline-primary btn-lg" role="button">Edit</a>
+                        <!-- <a href="#" class="btn btn-primary-emailed" role="button" ng-if="!job.available" disabled>Claimed</a> -->
+                        <a href="#" class="btn btn-primary-unemailed" role="button" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="job.available && !job.emailed" ng-click="$ctrl.sendEmail(job.id)">Send Email</a>
+                        <a href="#" class="btn btn-primary-emailed" role="button" ng-if="job.emailed && job.available" ng-click="$ctrl.sendEmail(job.id)">Resend Email</a></p>
+
                         <p><b>Applied:</b> {{ job.created_at }}</p>
                         <p><b>Job Title:</b> {{ job.job_title }}</p>
                         <p><b>Location:</b> {{ job.location }}</p>
@@ -49,26 +54,21 @@
                         <p><b>Cover Letter:</b> {{ job.cover_letter }}</p>
 
                         <div class="tasks">
-                          <div class="bottom-right box">
-                              <div class="label label-success" ng-if="job.applied">Applied <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
-                              <div class="label label-warning" ng-if="!job.applied">Apply</div>
-                              <br>
-                              <div class="label label-success" ng-if="job.emailed">Emailed <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
-                              <div class="label label-warning" ng-if="!job.emailed">Email</div>
-                          </div>
-                          <div ng-repeat="company in job.company">
-                              <!-- <p>{{ group.name }}</p> -->
-                          </div>
-                            <!-- <p><a href="#" class="btn btn-primary" role="button" ng-click="$ctrl.setItemEditId($index)">Edit</a> -->
-                            <a ui-sref="edit({ user_id: $ctrl.user_id })" class="btn btn-primary" role="button" ng-click="$ctrl.editJob(job.id)">Edit</a>
-
-                            <!-- <p><a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.setItemEditId($index)">Edit</a> -->
-                            <!-- <a href="#" class="btn btn-primary-emailed" role="button" ng-if="job.group.length == 0 && job.available" disabled>No Groups</a> -->
-                            <a href="#" class="btn btn-primary-emailed" role="button" ng-if="!job.available" disabled>Claimed</a>
-                            <a href="#" class="btn btn-primary-unemailed" role="button" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="job.available && !job.emailed" ng-click="$ctrl.sendEmail(job.id)">Send Email</a>
-
-                            <!-- <a href="#" class="btn btn-primary-unemailed" role="button" data-toggle="modal" data-target="#pleaseWaitDialog" ng-show="job.group.length > 0" ng-if="job.available && !job.emailed" ng-click="$ctrl.sendEmail(job.id)">Send Email</a> -->
-                            <a href="#" class="btn btn-primary-emailed" role="button" ng-if="job.emailed && job.available" ng-click="$ctrl.sendEmail(job.id)">Resend Email</a></p>
+                            <div class="bottom-right box">
+                                <div class="label label-success" ng-if="job.applied">Applied <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
+                                <div class="label label-warning" ng-if="!job.applied">Apply</div>
+                                <br>
+                                <div class="label label-success" ng-if="job.emailed">Emailed <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
+                                <div class="label label-warning" ng-if="!job.emailed">Email</div>
+                            </div>
+                            <div ng-repeat="company in job.company">
+                                <!-- <p>{{ group.name }}</p> -->
+                            </div>
+                            <a ui-sref="edit({ user_id: $ctrl.user_id, job_id: job.id })" class="btn btn-outline-primary btn-lg" role="button">Edit</a>
+                            <!-- <a ui-sref="edit({ user_id: $ctrl.user_id, job_id: job.id })" class="btn btn-primary" role="button">Edit</a> -->
+                            <!-- <a href="#" class="btn btn-primary-emailed" role="button" ng-if="!job.available" disabled>Claimed</a> -->
+                            <!-- <a href="#" class="btn btn-primary-unemailed" role="button" data-toggle="modal" data-target="#pleaseWaitDialog" ng-if="job.available && !job.emailed" ng-click="$ctrl.sendEmail(job.id)">Send Email</a> -->
+                            <!-- <a href="#" class="btn btn-primary-emailed" role="button" ng-if="job.emailed && job.available" ng-click="$ctrl.sendEmail(job.id)">Resend Email</a></p> -->
                         </div>
                     </div>
                 </div>
